@@ -1,0 +1,1922 @@
+:root{
+  --blue:#2563eb;
+  --blue-light:#eef4ff;
+  --green:#16a34a;
+  --green-light:#eefbf3;
+  --purple:#7c5cfc;
+  --purple-light:#f3f0ff;
+  --orange:#f5941f;
+  --orange-light:#fff6ea;
+  --teal:#0d9488;
+  --teal-light:#effaf9;
+  --border:#e6e9f0;
+  --text:#1e2433;
+  --muted:#8a93a6;
+  --bg:#f3f5fa;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  font-family:"Inter","Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  padding:28px;
+  -webkit-font-smoothing:antialiased;
+}
+.card{
+  max-width:960px;
+  margin:0 auto;
+  background:#fff;
+  border-radius:16px;
+  box-shadow:0 4px 18px rgba(30,40,80,0.06);
+  padding:30px 36px 34px;
+}
+
+/* ---------- Page title ---------- */
+.page-title{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:24px;
+}
+.page-icon{
+  font-size:20px;
+  background:var(--blue-light);
+  color:var(--blue);
+  width:36px;height:36px;
+  border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.page-title h1{
+  font-size:19px;
+  font-weight:700;
+  margin:2px 0 2px;
+  letter-spacing:-0.2px;
+}
+.page-title p{
+  font-size:13px;
+  color:var(--muted);
+  margin:0;
+}
+.claim-header-banner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  background:linear-gradient(135deg,#1d3fae,#2f5be0);
+  border-radius:14px;
+  padding:20px 24px;
+  margin-bottom:24px;
+  color:#fff;
+}
+.chb-left{display:flex; align-items:center; gap:14px;}
+.chb-icon{
+  width:38px;height:38px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+}
+.claim-header-banner h1{
+  font-size:18px;
+  font-weight:700;
+  margin:0 0 4px;
+  color:#fff;
+}
+.chb-status-row{
+  font-size:12.5px;
+  color:rgba(255,255,255,0.85);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.chb-status-badge{
+  background:rgba(255,255,255,0.2);
+  padding:3px 10px;
+  border-radius:20px;
+  font-weight:700;
+  font-size:11.5px;
+  color:#fff;
+}
+.chb-close{
+  border:none;
+  background:rgba(255,255,255,0.15);
+  color:#fff;
+  width:30px;height:30px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:14px;
+}
+.chb-close:hover{background:rgba(255,255,255,0.28);}
+/* ---------- Basic fields ---------- */
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  margin-bottom:18px;
+}
+label{
+  display:block;
+  font-size:12.5px;
+  font-weight:600;
+  margin-bottom:6px;
+  color:var(--text);
+}
+.req{color:#e0433c;}
+select, input[type=text], input[type=number], input[type=email], input[type=date], textarea{
+  width:100%;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  font-size:13.5px;
+  background:#fbfcfe;
+  color:var(--text);
+  font-family:inherit;
+}
+select:focus, input:focus, textarea:focus{
+  outline:none;
+  border-color:var(--blue);
+  background:#fff;
+}
+select:disabled, input:disabled{
+  background:#f1f2f6;
+  color:var(--muted);
+  cursor:not-allowed;
+}
+.readonly-field{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  padding:11px 13px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#f8f9fc;
+  color:var(--text);
+  font-size:13.5px;
+  font-weight:600;
+}
+.avatar-icon{
+  width:22px;height:22px;
+  border-radius:50%;
+  background:var(--blue-light);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--blue);
+}
+
+/* ---------- Claim type option cards ---------- */
+.claim-type-label{margin-bottom:10px;}
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:14px;
+}
+.option-card{
+  border:1.5px solid var(--border);
+  border-radius:12px;
+  padding:22px 18px;
+  text-align:center;
+  cursor:pointer;
+  position:relative;
+  background:#fbfcfe;
+  transition:border-color .15s, background .15s, box-shadow .15s;
+}
+.option-card .icon{
+  width:42px;height:42px;
+  margin:0 auto 10px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:19px;
+  background:var(--purple-light);
+  color:var(--purple);
+}
+.option-card.billing .icon{
+  background:var(--teal-light);
+  color:var(--teal);
+}
+.option-card .title{
+  font-weight:700;
+  font-size:14px;
+  margin-bottom:6px;
+  color:var(--text);
+}
+.option-card .desc{
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
+}
+.option-card.selected{
+  border-color:var(--purple);
+  background:var(--purple-light);
+  box-shadow:0 0 0 3px rgba(124,92,252,0.12);
+}
+.option-card.billing.selected{
+  border-color:var(--teal);
+  background:var(--teal-light);
+  box-shadow:0 0 0 3px rgba(13,148,136,0.12);
+}
+.check{
+  position:absolute;
+  top:12px;right:12px;
+  width:20px;height:20px;
+  border-radius:50%;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  font-size:11px;
+}
+.option-card.selected .check{display:flex; background:var(--purple);}
+.option-card.billing.selected .check{background:var(--teal);}
+
+.tip{
+  background:var(--blue-light);
+  border-radius:9px;
+  padding:11px 15px;
+  font-size:12.5px;
+  color:#2f4a8a;
+  margin-bottom:26px;
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+}
+
+/* ---------- Subforms & panels ---------- */
+.subform{display:none;}
+.subform.active{display:block;}
+
+.panel{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px 20px 20px;
+  margin-bottom:18px;
+  background:#fff;
+}
+.panel .row:last-child, .panel .row{margin-bottom:0;}
+.panel > label{margin-top:14px;}
+.panel > label:first-of-type{margin-top:0;}
+
+.panel-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:0.4px;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.panel-ico{
+  font-size:13px;
+  width:22px;height:22px;
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+}
+.panel-title.green{color:var(--green);}
+.panel-title.green .panel-ico{background:var(--green-light);}
+.panel-title.blue{color:var(--blue);}
+.panel-title.blue .panel-ico{background:var(--blue-light);}
+.panel-title.purple{color:var(--purple);}
+.panel-title.purple .panel-ico{background:var(--purple-light);}
+.panel-title.orange{color:var(--orange);}
+.panel-title.orange .panel-ico{background:var(--orange-light);}
+.panel-title.teal{color:var(--teal);}
+.panel-title.teal .panel-ico{background:var(--teal-light);}
+
+.panel-optional{
+  font-size:11px;
+  font-weight:600;
+  color:var(--muted);
+  text-transform:none;
+  letter-spacing:normal;
+}
+.panel-note{
+  font-size:11.5px;
+  color:var(--muted);
+  margin-top:12px;
+}
+.panel-desc{
+  font-size:12.5px;
+  color:var(--muted);
+  margin:-8px 0 14px;
+  line-height:1.5;
+}
+
+.claim-settings-row{
+  display:block;
+  padding:20px 24px;
+}
+.csr-title-row{
+  margin-bottom:16px;
+}
+.csr-cols{
+  display:grid;
+  grid-template-columns:1fr auto 1fr auto 1fr;
+  gap:20px;
+  align-items:start;
+}
+.csr-col{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-width:0;
+}
+.csr-divider{
+  width:1px;
+  align-self:stretch;
+  background:var(--border);
+}
+.csr-label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text);
+}
+.csr-ico{
+  font-size:13px;
+  line-height:1;
+}
+.csr-info{
+  font-size:11px;
+  color:var(--muted);
+  cursor:help;
+  margin-left:2px;
+}
+.csr-col select,
+.csr-col input[type=number]{
+  padding:9px 11px;
+  font-size:13px;
+}
+.csr-col .checkbox-inline-label{
+  font-size:12.5px;
+  font-weight:600;
+}
+
+@media (max-width:920px){
+  .csr-cols{
+    grid-template-columns:1fr;
+  }
+  .csr-divider{
+    width:auto;
+    height:1px;
+  }
+}
+
+.admission-toggle{display:flex; gap:8px;}
+.admission-btn{
+  flex:1;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  padding:9px 8px;
+  border:1.5px solid var(--border);
+  border-radius:9px;
+  background:#fbfcfe;
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text);
+  cursor:pointer;
+  white-space:nowrap;
+}
+.admission-btn.active{
+  border-color:var(--purple);
+  background:var(--purple-light);
+  color:var(--purple);
+  box-shadow:0 0 0 3px rgba(124,92,252,0.12);
+}
+
+@media (max-width:920px){
+  .claim-settings-row{
+    grid-template-columns:1fr;
+  }
+  .csr-divider{
+    width:auto;
+    height:1px;
+  }
+}
+
+.admission-toggle{display:flex; gap:8px;}
+.admission-btn{
+  flex:1;
+  display:flex; align-items:center; justify-content:center; gap:6px;
+  padding:11px 8px;
+  border:1.5px solid var(--border);
+  border-radius:9px;
+  background:#fbfcfe;
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text);
+  cursor:pointer;
+}
+.admission-btn.active{
+  border-color:var(--purple);
+  background:var(--purple-light);
+  color:var(--purple);
+  box-shadow:0 0 0 3px rgba(124,92,252,0.12);
+}
+@media (max-width:920px){
+  .referring-row{grid-template-columns:1fr;}
+}
+
+.checkbox-inline-label{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+}
+.checkbox-inline-label input[type=checkbox]{
+  width:15px;height:15px;
+  accent-color:var(--orange);
+  cursor:pointer;
+}
+
+.add-patient-row{
+  display:flex;
+  gap:10px;
+}
+.add-patient-row select{flex:1;}
+.btn-outline-add{
+  display:flex;align-items:center;gap:6px;
+  border:1px solid var(--green);
+  color:var(--green);
+  background:#fff;
+  border-radius:9px;
+  padding:0 16px;
+  height:44px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.btn-outline-add:hover{background:var(--green-light);}
+
+.btn-edit-patient{
+  display:flex;align-items:center;justify-content:center;
+  width:40px;height:40px;
+  flex-shrink:0;
+  border:1px solid var(--green);
+  color:var(--green);
+  background:#fff;
+  border-radius:50%;
+  font-size:14px;
+  cursor:pointer;
+}
+.btn-edit-patient:hover{background:var(--green-light);}
+.btn-edit-patient:disabled{
+  border-color:var(--border);
+  color:var(--muted);
+  cursor:not-allowed;
+  background:#fff;
+}
+
+.payer-info-row{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:18px;
+}
+.payer-info-item{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:13px;
+}
+.payer-info-label{
+  font-weight:600;
+  color:var(--muted);
+}
+.payer-info-value{
+  font-weight:700;
+  color:var(--text);
+}
+.payer-info-divider{
+  width:1px;
+  height:16px;
+  background:var(--border);
+}
+
+/* ---------- Claim items table ---------- */
+.items-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+.btn-add-item{
+  display:flex;align-items:center;gap:6px;
+  border:1px solid var(--blue);
+  color:var(--blue);
+  background:#fff;
+  border-radius:8px;
+  padding:7px 14px;
+  font-size:12.5px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn-add-item:hover{background:var(--blue-light);}
+
+/* "+ Add Line Item" button relocated to sit directly below the first
+   billing/claim item line, instead of at the top of the panel. */
+.add-item-below-row{
+  display:flex;
+  justify-content:flex-start;
+  margin:4px 0 14px;
+}
+
+table.items-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+}
+table.items-table th{
+  text-align:left;
+  font-size:11px;
+  color:var(--muted);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+  padding:8px 8px;
+  border-bottom:1px solid var(--border);
+}
+table.items-table td{
+  padding:8px 8px;
+  vertical-align:middle;
+}
+table.items-table input,
+table.items-table select{
+  padding:9px 11px;
+  font-size:13px;
+}
+.del-btn{
+  border:none;
+  background:none;
+  color:#e0433c;
+  cursor:pointer;
+  font-size:15px;
+}
+
+/* ---------- Dropzone ---------- */
+.dropzone{
+  border:1.5px dashed #c7cee0;
+  border-radius:10px;
+  padding:24px;
+  text-align:center;
+  background:#fafbfe;
+  font-size:13px;
+  color:var(--muted);
+  cursor:pointer;
+}
+.dropzone .cloud{font-size:20px;display:block;margin-bottom:8px;color:var(--blue);}
+.dropzone a{color:var(--blue);text-decoration:none;font-weight:700;}
+.hint{font-size:11px;color:var(--muted);margin-top:6px;}
+.dropzone.dragover{
+  border-color:var(--blue);
+  background:var(--blue-light);
+}
+.file-list{
+  margin-top:12px;
+  text-align:left;
+}
+.file-item{
+  font-size:12.5px;
+  color:var(--text);
+  padding:4px 0;
+}
+
+textarea{resize:vertical;min-height:80px;}
+.char-count{
+  text-align:right;
+  font-size:11px;
+  color:var(--muted);
+  margin-top:4px;
+}
+
+/* ---------- Actions ---------- */
+.actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:8px;
+  padding-top:20px;
+}
+.actions button{
+  padding:11px 22px;
+  border-radius:9px;
+  font-size:13.5px;
+  font-weight:700;
+  cursor:pointer;
+  border:1px solid var(--border);
+  background:#fff;
+  font-family:inherit;
+}
+.actions .btn-cancel{color:var(--text);}
+.actions .btn-draft{color:var(--blue);border-color:var(--blue);background:#fff;}
+.actions .btn-draft:hover{background:var(--blue-light);}
+.actions .submit{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:#fff;
+}
+.actions .submit:hover{background:#1d4fd1;}
+.actions .submit.billing-mode{
+  background:var(--teal);
+  border-color:var(--teal);
+}
+.actions .submit.billing-mode:hover{background:#0b7d72;}
+
+@media (max-width:920px){
+  .row, .options, .two-panel-row{grid-template-columns:1fr;}
+}
+
+/* ============================================================
+   CALENDAR POPUP (Date of Service picker)
+   ============================================================ */
+.date-input{
+  cursor:pointer;
+  background:#fff;
+}
+.calendar-popup{
+  display:none;
+  position:absolute;
+  z-index:1000;
+  width:260px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:10px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.12);
+  padding:12px;
+  font-size:13px;
+}
+.cal-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+.cal-title{
+  font-weight:700;
+  font-size:13.5px;
+}
+.cal-nav{
+  border:none;
+  background:none;
+  font-size:16px;
+  cursor:pointer;
+  color:var(--text);
+  width:26px;height:26px;
+  border-radius:6px;
+}
+.cal-nav:hover{background:var(--bg);}
+.cal-nav:disabled{
+  color:#d1d5db;
+  cursor:not-allowed;
+}
+.cal-weekdays{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  text-align:center;
+  font-size:11px;
+  color:var(--muted);
+  font-weight:600;
+  margin-bottom:6px;
+}
+.cal-days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:2px;
+}
+.cal-day{
+  border:none;
+  background:none;
+  padding:6px 0;
+  text-align:center;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:12.5px;
+  color:var(--text);
+}
+.cal-day.empty{cursor:default;}
+.cal-day:not(.disabled):not(.empty):hover{
+  background:var(--blue-light);
+}
+.cal-day.today{
+  background:var(--blue);
+  color:#fff;
+  font-weight:700;
+}
+.cal-day.disabled{
+  color:#d1d5db;
+  cursor:not-allowed;
+}
+.cal-footer{
+  border-top:1px solid var(--border);
+  margin-top:8px;
+  padding-top:8px;
+  text-align:right;
+}
+.cal-clear{
+  border:none;
+  background:none;
+  color:#e0433c;
+  font-size:12.5px;
+  font-weight:600;
+  cursor:pointer;
+  padding:4px 8px;
+  border-radius:6px;
+}
+.cal-clear:hover{
+  background:#fdecea;
+}
+
+/* ============================================================
+   SUCCESS MODAL
+   ============================================================ */
+.modal-overlay{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(15,18,25,0.55);
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+}
+.modal-overlay.active{
+  display:flex;
+}
+.modal-box{
+  background:#fff;
+  border-radius:14px;
+  padding:32px 28px 28px;
+  width:280px;
+  text-align:center;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+}
+.modal-icon{
+  margin:0 auto 14px;
+  width:52px;
+  height:52px;
+}
+.modal-title{
+  font-size:15.5px;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:6px;
+}
+.modal-subtitle{
+  font-size:12.5px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.modal-continue{
+  width:100%;
+  padding:11px 0;
+  border:none;
+  border-radius:8px;
+  background:var(--blue);
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:inherit;
+}
+.modal-continue:hover{
+  background:#1d4fd1;
+}
+
+/* ============================================================
+   ADD NEW PATIENT MODAL  (redesigned to match reference layout)
+   ============================================================ */
+.patient-modal-overlay{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(15,18,25,0.6);
+  z-index:2100;
+  align-items:flex-start;
+  justify-content:center;
+  padding:24px;
+  overflow-y:auto;
+}
+.patient-modal-overlay.active{
+  display:flex;
+}
+.patient-modal-box{
+  background:#fff;
+  border-radius:14px;
+  width:100%;
+  max-width:1280px;
+  max-height:none;
+  display:flex;
+  flex-direction:column;
+  overflow:visible;
+  box-shadow:0 24px 64px rgba(0,0,0,0.3);
+  margin:0 auto;
+}
+
+/* ---- Header: white/no background, back arrow + icon + title on the
+   left, required-fields note + Cancel + Save Patient on the right ---- */
+.patient-modal-header{
+  background:#fff;
+  color:var(--text);
+  padding:18px 26px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  flex-shrink:0;
+  border-bottom:1px solid var(--border);
+  border-radius:14px 14px 0 0;
+}
+.pm-header-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.pm-back-btn{
+  border:none;
+  background:none;
+  color:var(--text);
+  font-size:18px;
+  width:32px;height:32px;
+  border-radius:8px;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.pm-back-btn:hover{background:var(--bg);}
+.pm-header-icon{
+  width:36px;height:36px;
+  border-radius:10px;
+  background:var(--blue-light);
+  color:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+  flex-shrink:0;
+}
+.patient-modal-title{
+  font-size:17px;
+  font-weight:700;
+  color:var(--text);
+  line-height:1.3;
+}
+.pm-header-subtitle{
+  font-size:12.5px;
+  color:var(--muted);
+  margin-top:2px;
+}
+.pm-header-right{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.pm-required-note{
+  font-size:12px;
+  font-weight:600;
+  color:var(--muted);
+  white-space:nowrap;
+}
+.pm-header-cancel-btn{
+  padding:9px 18px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  font-family:inherit;
+  white-space:nowrap;
+}
+.pm-header-cancel-btn:hover{background:var(--bg);}
+.pm-header-save-btn{
+  padding:9px 18px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  background:var(--blue);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-family:inherit;
+  white-space:nowrap;
+}
+.pm-header-save-btn:hover{background:#1d4fd1;}
+.pm-icon{display:none;}
+
+.patient-modal-body{
+  padding:24px 28px;
+  overflow-y:visible;
+  flex:1;
+  background:#f8f9fc;
+}
+
+/* Numbered section headers, e.g. "1  Patient Details" */
+.pm-section-title{
+  display:flex;
+  align-items:baseline;
+  gap:10px;
+  flex-wrap:wrap;
+  font-size:14.5px;
+  font-weight:800;
+  color:var(--text);
+  margin:26px 0 14px;
+}
+.pm-section-title:first-child{margin-top:0;}
+.pm-num{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;height:22px;
+  border-radius:50%;
+  background:var(--blue);
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  flex-shrink:0;
+}
+.pm-num.pink{background:#e0439c;}
+.pm-optional{
+  font-size:11.5px;
+  font-weight:500;
+  color:var(--muted);
+  text-transform:none;
+  letter-spacing:normal;
+}
+.pm-info-icon{
+  font-size:11px;
+  color:var(--muted);
+  cursor:help;
+  text-transform:none;
+}
+
+.pm-row-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:14px;
+}
+.pm-row-3{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:16px;
+  margin-bottom:14px;
+}
+.pm-row-4{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:16px;
+  margin-bottom:14px;
+}
+.patient-modal-body input,
+.patient-modal-body select{
+  background:#fff;
+}
+.patient-modal-body input::placeholder{
+  color:#b3b8c2;
+}
+
+.pm-phone-row{
+  display:flex;
+  gap:8px;
+}
+.pm-phone-prefix{
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#f9fafb;
+  font-size:13px;
+  color:var(--text);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.pm-phone-row input{flex:1;}
+
+.pm-payer-hint{
+  font-size:12px;
+  color:var(--muted);
+  margin:-4px 0 14px;
+}
+.pm-multi-hint{
+  font-size:11.5px;
+  color:var(--muted);
+  margin:8px 0 0;
+}
+
+/* Payer detail cards (Medicare / DVA / Health Fund forms) */
+.pm-payer-grid{
+  display:grid;
+  grid-template-columns:0.85fr 0.85fr 2.1fr;
+  gap:14px;
+  align-items:stretch;
+}
+.pm-payer-card{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:16px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  height:100%;
+}
+/* Medicare + DVA cards always match each other's height */
+.pm-payer-grid > .pm-payer-card:not(.hf-card){
+  align-self:stretch;
+}
+.pm-payer-card-title{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:12px;
+}
+.pm-payer-card-ico{
+  width:24px;height:24px;
+  border-radius:6px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;
+  flex-shrink:0;
+}
+.pm-payer-card-title.green .pm-payer-card-ico{background:var(--green-light); color:var(--green);}
+.pm-payer-card-title.purple .pm-payer-card-ico{background:var(--purple-light); color:var(--purple);}
+.pm-payer-card-title.orange .pm-payer-card-ico{background:var(--orange-light); color:var(--orange);}
+.pm-payer-field-label{
+  font-size:10.5px;
+  font-weight:700;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+  margin:10px 0 4px;
+}
+.pm-payer-card label.pm-payer-field-label:first-of-type{margin-top:0;}
+.pm-payer-card input,
+.pm-payer-card select{
+  font-size:12.5px;
+  padding:9px 11px;
+}
+.hf-card{grid-column:span 1;}
+
+.pm-payer-card-title-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:2px;
+}
+.pm-payer-card-title-row .pm-payer-card-title{margin-bottom:0;}
+.hf-add-btn{
+  height:32px;
+  padding:0 12px;
+  font-size:11.5px;
+  border-color:var(--orange);
+  color:var(--orange);
+}
+.hf-add-btn:hover{background:var(--orange-light);}
+.pm-payer-card-desc{
+  font-size:11.5px;
+  color:var(--muted);
+  margin:0 0 12px;
+}
+.pm-payer-card-note{
+  display:flex;
+  gap:6px;
+  align-items:flex-start;
+  font-size:11px;
+  color:var(--muted);
+  margin-top:10px;
+}
+
+/* Health Fund / Work Cover records table (inline-editable, no popup) */
+table.hf-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:12px;
+}
+table.hf-table th{
+  text-align:left;
+  font-size:10px;
+  color:var(--muted);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.3px;
+  padding:6px 8px;
+  border-bottom:1px solid var(--border);
+}
+table.hf-table td{
+  padding:6px 6px;
+  vertical-align:middle;
+  border-bottom:1px solid var(--border);
+}
+table.hf-table td.hf-empty{
+  text-align:center;
+  color:var(--muted);
+  font-size:12px;
+  padding:16px 8px;
+  border-bottom:none;
+}
+table.hf-table td input,
+table.hf-table td select{
+  padding:7px 8px;
+  font-size:11.5px;
+  border-radius:7px;
+  min-width:110px;
+}
+.hf-payer-name{font-weight:700; color:var(--text);}
+.hf-type-badge{
+  display:inline-block;
+  font-size:10.5px;
+  font-weight:700;
+  padding:3px 9px;
+  border-radius:20px;
+  background:var(--orange-light);
+  color:var(--orange);
+}
+.hf-action-btn{
+  border:none;
+  background:none;
+  cursor:pointer;
+  font-size:13px;
+  padding:2px 4px;
+}
+.hf-action-btn.edit{color:var(--blue);}
+.hf-action-btn.delete{color:#e0433c;}
+
+@media (max-width:1100px){
+  .pm-payer-grid{grid-template-columns:1fr 1fr;}
+  .hf-card{grid-column:span 2;}
+}
+@media (max-width:700px){
+  .pm-payer-grid{grid-template-columns:1fr;}
+  .hf-card{grid-column:span 1;}
+}
+
+/* "Who is Paying" selectable option cards */
+.pm-payer-select-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+.pm-payer-select-grid.four-up{
+  grid-template-columns:repeat(4,1fr);
+}
+.pm-payer-option{
+  position:relative;
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  border:1.5px solid var(--border);
+  border-radius:10px;
+  padding:14px;
+  background:#fff;
+  cursor:pointer;
+  transition:border-color .15s, background .15s, box-shadow .15s;
+}
+.pm-payer-option input[type=checkbox]{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:16px;height:16px;
+  accent-color:var(--blue);
+  cursor:pointer;
+  margin:0;
+}
+.pm-payer-option-ico{
+  width:30px;height:30px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+  flex-shrink:0;
+}
+.pm-payer-option-ico.green{background:var(--green-light); color:var(--green);}
+.pm-payer-option-ico.purple{background:var(--purple-light); color:var(--purple);}
+.pm-payer-option-ico.orange{background:var(--orange-light); color:var(--orange);}
+.pm-payer-option-ico.blue{background:var(--blue-light); color:var(--blue);}
+.pm-payer-option-text{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
+  padding-right:16px;
+}
+.pm-payer-option-title{
+  font-size:12.5px;
+  font-weight:700;
+  color:var(--text);
+}
+.pm-payer-option-desc{
+  font-size:11px;
+  color:var(--muted);
+  line-height:1.4;
+}
+.pm-payer-option:has(input:checked){
+  border-color:var(--blue);
+  background:var(--blue-light);
+  box-shadow:0 0 0 3px rgba(37,99,235,0.12);
+}
+#wpo-medicare:has(input:checked){
+  border-color:var(--green);
+  background:var(--green-light);
+  box-shadow:0 0 0 3px rgba(22,163,74,0.12);
+}
+#wpo-medicare .pm-payer-option-ico{background:var(--green-light); color:var(--green);}
+#wpo-dva:has(input:checked){
+  border-color:var(--purple);
+  background:var(--purple-light);
+  box-shadow:0 0 0 3px rgba(124,92,252,0.12);
+}
+#wpo-healthfund:has(input:checked){
+  border-color:var(--orange);
+  background:var(--orange-light);
+  box-shadow:0 0 0 3px rgba(245,148,31,0.12);
+}
+#wpo-selfpay:has(input:checked){
+  border-color:var(--blue);
+  background:var(--blue-light);
+  box-shadow:0 0 0 3px rgba(37,99,235,0.12);
+}
+
+@media (max-width:900px){
+  .pm-payer-select-grid{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:560px){
+  .pm-payer-select-grid{grid-template-columns:1fr;}
+}
+
+/* Health Fund selector shown under the "Who is paying" cards */
+.pm-hf-select-row{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:14px 16px;
+  background:#fff;
+  margin-top:14px;
+}
+.pm-hf-select-row select{margin-top:2px;}
+.pm-hf-select-hint{
+  font-size:11px;
+  color:var(--muted);
+  margin-top:8px;
+  display:flex;
+  gap:6px;
+  align-items:flex-start;
+}
+
+.pm-note{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  background:var(--blue-light);
+  color:#2f4a8a;
+  border-radius:8px;
+  padding:12px 14px;
+  font-size:12px;
+  margin-top:22px;
+}
+.pm-error{
+  background:#fdecea;
+  color:#c0392b;
+  border-radius:8px;
+  padding:10px 14px;
+  font-size:12.5px;
+  margin-top:14px;
+  font-weight:600;
+}
+
+.patient-modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  padding:16px 26px;
+  border-top:1px solid var(--border);
+  flex-shrink:0;
+  background:#fff;
+  border-radius:0 0 14px 14px;
+}
+.pm-cancel-btn{
+  padding:10px 22px;
+  border-radius:8px;
+  font-size:13.5px;
+  font-weight:600;
+  cursor:pointer;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  font-family:inherit;
+}
+.pm-create-btn{
+  padding:10px 22px;
+  border-radius:8px;
+  font-size:13.5px;
+  font-weight:700;
+  cursor:pointer;
+  border:none;
+  background:var(--blue);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-family:inherit;
+}
+.pm-create-btn:hover{background:#1d4fd1;}
+.pm-create-btn:disabled{
+  background:#a9c2f5;
+  cursor:not-allowed;
+}
+
+@media (max-width:1150px){
+  .pm-row-4{grid-template-columns:1fr 1fr;}
+}
+@media (max-width:760px){
+  .pm-row-2, .pm-row-3, .pm-row-4{
+    grid-template-columns:1fr;
+  }
+  .pm-header-right{width:100%; justify-content:space-between;}
+}
+/* ============================================================
+   SEARCHABLE ITEM NUMBER LOOKUP (Claim Items table)
+   Paste this block at the END of your existing style.css
+   ============================================================ */
+
+/* The popup is absolutely positioned inside the cell, so the panel
+   needs a stacking context above the panels that follow it. */
+.items-panel{position:relative; z-index:5;}
+
+.item-lookup{position:relative;}
+
+.item-lookup-input{
+  width:100%;
+  padding:9px 11px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  font-size:13px;
+  background:#fff;
+  color:var(--text);
+  font-family:inherit;
+}
+.item-lookup-input:focus{
+  outline:none;
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(22,163,74,0.12);
+}
+
+.item-lookup-list{
+  display:none;
+  position:absolute;
+  z-index:1200;
+  top:calc(100% + 4px);
+  left:0;
+  width:300px;
+  max-width:80vw;
+  max-height:260px;
+  overflow-y:auto;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:9px;
+  box-shadow:0 8px 24px rgba(0,0,0,0.14);
+}
+
+.item-lookup-option{
+  padding:9px 12px;
+  font-size:13px;
+  cursor:pointer;
+  border-bottom:1px solid #f2f4f8;
+}
+.item-lookup-option:last-child{border-bottom:none;}
+.item-lookup-option:hover{background:var(--green-light);}
+
+.ilo-code{
+  font-weight:700;
+  color:var(--text);
+}
+.ilo-desc{
+  display:block;
+  font-size:11.5px;
+  color:var(--muted);
+  margin-top:2px;
+  line-height:1.35;
+  overflow:hidden;
+  display:-webkit-box;
+  --webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+}
+
+.item-lookup-empty{
+  padding:14px 12px;
+  font-size:12.5px;
+  color:var(--muted);
+  text-align:center;
+}
+/* Payer option disabled until its details are entered */
+.pm-payer-option-disabled{
+  opacity:0.5;
+  cursor:not-allowed;
+}
+.pm-payer-option-disabled:hover{
+  border-color:var(--border) !important;
+  background:#fff !important;
+  box-shadow:none !important;
+}
+.pm-payer-option-disabled input[type=checkbox]{
+  cursor:not-allowed;
+}
+
+/* ============================================================
+   CLAIM-LEVEL VALIDATION ERROR (mandatory field check on Submit)
+   ============================================================ */
+.claim-error{
+  display:flex;
+  gap:8px;
+  align-items:flex-start;
+  background:#fdecea;
+  color:#c0392b;
+  border:1px solid #f6c6c1;
+  border-radius:9px;
+  padding:12px 15px;
+  font-size:12.5px;
+  font-weight:600;
+  margin-top:18px;
+}
+.claim-error::before{
+  content:"⚠️";
+  flex-shrink:0;
+}
+.field-invalid{
+  border-color:#e0433c !important;
+  box-shadow:0 0 0 3px rgba(224,67,60,0.12) !important;
+}
+/* ============================================================
+   MOBILE RESPONSIVE OVERRIDES (<=600px)
+   Purely visual — no functional/JS changes.
+   ============================================================ */
+@media (max-width:600px){
+    #primarySurgeonRow{
+    padding-top:14px;
+    margin-top:14px;
+  }
+  #primarySurgeonRow.row{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+
+  body{ padding:10px; }
+
+  /* ---------- 1. Card + header banner ---------- */
+  .card{
+    padding:14px 12px 18px;
+    border-radius:12px;
+  }
+  .claim-header-banner{
+    padding:12px 14px;
+    border-radius:10px;
+    margin-bottom:14px;
+  }
+  .chb-left{ gap:8px; }
+  .chb-icon{
+    width:28px; height:28px;
+    font-size:13px;
+    border-radius:8px;
+    flex-shrink:0;
+  }
+  .claim-header-banner h1{
+    font-size:13.5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    margin:0;
+  }
+  .chb-close{
+    width:24px; height:24px;
+    font-size:11px;
+    flex-shrink:0;
+  }
+
+  /* ---------- 2. Doctor / Hospital row ---------- */
+  .row{
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  label{ font-size:11px; margin-bottom:4px; }
+  select, input[type=text], input[type=number], input[type=email], input[type=date], textarea{
+    padding:8px 10px;
+    font-size:12.5px;
+  }
+  .readonly-field{
+    padding:8px 10px;
+    font-size:12.5px;
+  }
+  .avatar-icon{ width:18px; height:18px; font-size:9px; }
+
+  /* ---------- 3. Claim submission type ---------- */
+  .claim-type-label{ font-size:11.5px; }
+  .options{
+    grid-template-columns:1fr;
+    gap:10px;
+    margin-bottom:10px;
+  }
+  .option-card{
+    padding:12px 10px;
+  }
+  .option-card .icon{
+    width:30px; height:30px;
+    font-size:14px;
+    margin-bottom:6px;
+  }
+  .option-card .title{ font-size:12.5px; margin-bottom:3px; }
+  .option-card .desc{ font-size:10.5px; line-height:1.4; }
+  .check{
+    width:16px; height:16px;
+    font-size:9px;
+    top:8px; right:8px;
+  }
+  .tip{
+    font-size:11px;
+    padding:8px 10px;
+    margin-bottom:14px;
+  }
+
+  /* ---------- General panel spacing ---------- */
+  .panel{
+    padding:12px 12px 14px;
+    margin-bottom:12px;
+    border-radius:10px;
+  }
+  .panel-title{
+    font-size:10.5px;
+    margin-bottom:10px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .panel-ico{ width:18px; height:18px; font-size:11px; }
+  .panel-optional{ font-size:9.5px; }
+  .panel-note{ font-size:10px; }
+  .panel-desc{ font-size:11px; }
+
+  /* ---------- 4. Patient section ---------- */
+  .add-patient-row{
+    flex-direction:column;
+    gap:8px;
+  }
+  .add-patient-row select{
+    width:100%;
+    flex:none;
+  }
+  .add-patient-row .btn-edit-patient,
+  .add-patient-row .btn-outline-add{
+    width:100%;
+    height:38px;
+    justify-content:center;
+  }
+  .btn-outline-add{
+    font-size:12px;
+    padding:0 12px;
+  }
+
+  /* ---------- 5. Payer information ---------- */
+  .payer-info-row{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+  }
+  .payer-info-item{ font-size:11.5px; }
+  .payer-info-divider{ display:none; }
+
+  /* ---------- 6. Referring doctor ---------- */
+  .panel-title.purple{
+    font-size:10.5px;
+  }
+  .referring-row{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .referring-add-btn-cell .btn-outline-add.purple{
+    width:100%;
+    justify-content:center;
+    font-size:12px;
+  }
+
+  /* ---------- 7. Claim settings ---------- */
+  .claim-settings-row{
+    padding:12px 12px 14px;
+  }
+  /* Primary Surgeon row — now full-width, below the 3-column settings grid */
+#primarySurgeonRow{
+  border-top:1px solid var(--border);
+  padding-top:18px;
+}
+#primarySurgeonRow > div select,
+#primarySurgeonRow > div input{
+  width:100%;
+}
+  .csr-cols{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .csr-divider{
+    width:auto;
+    height:1px;
+  }
+  .csr-label{ font-size:11px; }
+  .csr-col select, .csr-col input[type=number]{
+    font-size:12px;
+    padding:8px 10px;
+  }
+  .csr-col .checkbox-inline-label{ font-size:11.5px; }
+  .admission-toggle{ gap:6px; }
+  .admission-btn{
+    font-size:11px;
+    padding:8px 4px;
+  }
+
+  /* ---------- 8. Claim items — scrollable table ---------- */
+  .items-panel{
+    padding:12px 10px 14px;
+  }
+  .items-header{ margin-bottom:10px; }
+  .items-table-scroll{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  table.items-table{
+    min-width:560px; /* forces horizontal scroll instead of squashing/overlap */
+    font-size:12px;
+  }
+  table.items-table th{
+    font-size:9.5px;
+    padding:6px 6px;
+    white-space:nowrap;
+  }
+  table.items-table td{ padding:6px 6px; }
+  table.items-table input,
+  table.items-table select{
+    font-size:12px;
+    padding:7px 8px;
+  }
+  .date-input{ width:110px; }
+  .item-lookup{ width:150px; }
+  .item-lookup-list{ width:220px; }
+  .comments-input{ width:150px; }
+  .btn-add-item{ font-size:11.5px; padding:6px 10px; }
+
+  /* ---------- 9. Supporting documents ---------- */
+  .dropzone{
+    padding:14px 10px;
+    font-size:11.5px;
+  }
+  .dropzone .cloud{ font-size:16px; margin-bottom:6px; }
+  .hint{ font-size:9.5px; }
+  .file-item{ font-size:11px; }
+  textarea{ min-height:60px; font-size:12px; }
+  .char-count{ font-size:10px; }
+
+  /* ---------- 10. Action buttons ---------- */
+  .actions{
+    flex-wrap:wrap;
+    gap:8px;
+    padding-top:14px;
+  }
+  .actions button{
+    flex:1 1 calc(50% - 8px);
+    padding:10px 8px;
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .actions .submit{
+    flex:1 1 100%;
+    order:3;
+  }
+  .actions .btn-cancel{ order:1; }
+  .actions .btn-draft{ order:2; }
+
+  .claim-error{
+    font-size:11.5px;
+    padding:10px 12px;
+  }
+
+  /* ---------- Add-patient modal on mobile ---------- */
+  .patient-modal-overlay{ padding:8px; }
+  .patient-modal-box{ max-width:100%; }
+  .patient-modal-header{ padding:12px 14px; }
+  .patient-modal-title{ font-size:14px; }
+  .pm-header-subtitle{ font-size:11px; }
+  .patient-modal-body{ padding:14px 14px; }
+  .pm-row-4, .pm-row-3, .pm-row-2{
+    grid-template-columns:1fr;
+    gap:10px;
+  }
+  .pm-payer-grid{ grid-template-columns:1fr; }
+  .pm-payer-select-grid.four-up{ grid-template-columns:1fr 1fr; }
+  .patient-modal-footer{
+    padding:12px 14px;
+    flex-wrap:wrap;
+  }
+  .pm-cancel-btn, .pm-create-btn{
+    flex:1 1 calc(50% - 5px);
+    justify-content:center;
+    font-size:12.5px;
+    padding:9px 10px;
+  }
+}
+/* ============================================================
+   CREATE / EDIT PATIENT MODAL — MOBILE RESPONSIVE
+   Purely visual — no functional/JS changes.
+   ============================================================ */
+/* Let grid/flex children shrink instead of forcing horizontal scroll */
+.pm-row-2 > *, .pm-row-3 > *, .pm-row-4 > *,
+.pm-payer-grid > *, .pm-payer-select-grid > *{
+  min-width:0;
+}
+
+@media (max-width:700px){
+  .patient-modal-overlay{ overflow-x:hidden; }
+  .patient-modal-box{ overflow-x:clip; }
+
+  /* Header: stack title + required note */
+  .patient-modal-header{ gap:8px; }
+  .pm-header-left{ align-items:flex-start; min-width:0; flex:1 1 100%; }
+  .pm-header-left > div:last-child{ min-width:0; }
+  .pm-header-right{ width:100%; justify-content:flex-start; }
+
+  /* Section titles: hint text drops onto its own line */
+  .pm-section-title{ margin:20px 0 12px; }
+  .pm-section-title .pm-optional{ flex-basis:100%; }
+
+  /* Phone prefix + input */
+  .pm-phone-prefix{ padding:0 10px; font-size:12px; }
+  .pm-phone-row input{ min-width:0; }
+
+  /* Payer cards */
+  .pm-payer-card{ padding:14px; height:auto; }
+  .pm-payer-card-title-row{ align-items:flex-start; }
+  .hf-add-btn{ width:100%; height:auto; min-height:36px; padding:8px 12px; white-space:normal; }
+
+  /* Health Fund / Work Cover table -> stacked cards */
+  table.hf-table,
+  table.hf-table tbody,
+  table.hf-table tr,
+  table.hf-table td{
+    display:block;
+    width:100%;
+  }
+  table.hf-table thead{ display:none; }
+  table.hf-table tr{
+    position:relative;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:10px 12px 4px;
+    margin-bottom:10px;
+    background:#fbfcfe;
+  }
+  table.hf-table td{
+    border-bottom:none;
+    padding:0 0 8px;
+  }
+  table.hf-table td input,
+  table.hf-table td select{
+    min-width:0;
+    width:100%;
+    font-size:12.5px;
+    padding:9px 10px;
+  }
+  table.hf-table tr:not(#hfEmptyRow) td::before{
+    display:block;
+    font-size:10px;
+    font-weight:700;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+    margin-bottom:4px;
+  }
+  table.hf-table tr:not(#hfEmptyRow) td:nth-child(1)::before{ content:"Payer / Insurer Name"; padding-right:34px; }
+  table.hf-table tr:not(#hfEmptyRow) td:nth-child(2)::before{ content:"Type"; }
+  table.hf-table tr:not(#hfEmptyRow) td:nth-child(3)::before{ content:"Membership / Claim Number"; }
+  table.hf-table tr:not(#hfEmptyRow) td:nth-child(4)::before{ content:"Additional Details"; }
+  /* Delete button pinned to the card's top-right corner */
+  table.hf-table tr:not(#hfEmptyRow) td:nth-child(5){
+    position:absolute;
+    top:6px;
+    right:6px;
+    width:auto;
+    padding:0;
+  }
+  table.hf-table tr#hfEmptyRow{ border-style:dashed; background:#fff; padding:4px; }
+  table.hf-table td.hf-empty{ padding:12px 8px; }
+
+  /* Who is paying + selected health fund */
+  .pm-payer-option{ padding:12px; }
+  .pm-hf-select-row{ padding:12px; }
+  .pm-note{ font-size:11.5px; padding:10px 12px; }
+}
+
+@media (max-width:420px){
+  .pm-payer-select-grid.four-up{ grid-template-columns:1fr; }
+  .patient-modal-overlay{ padding:0; }
+  .patient-modal-box{ border-radius:0; min-height:100%; }
+  .patient-modal-header{ border-radius:0; }
+  .patient-modal-footer{
+    border-radius:0;
+    position:sticky;
+    bottom:0;
+    z-index:2;
+  }
+  .pm-header-icon{ display:none; }
+}
+
+/* ============================================================
+   CLAIM SETTINGS + CLAIM ITEMS — MOBILE LAYOUT
+   Purely visual — no functional/JS changes.
+   ============================================================ */
+@media (max-width:600px){
+  /* Show Primary Surgeon fields directly under the Asst Surgeon field */
+  .claim-settings-row{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .csr-title-row{ margin-bottom:0; order:0; }
+  .csr-cols{ display:contents; }
+  .csr-cols > *{ order:3; }
+  .csr-cols > .csr-col:first-child{ order:1; }
+  #primarySurgeonRow{
+    order:2;
+    margin-top:0 !important;
+    padding-top:0;
+    border-top:none;
+  }
+
+  /* Claim items table -> stacked cards (like Health Fund / Work Cover) */
+  .items-table-scroll{ overflow:visible; }
+  table.items-table{ min-width:0; }
+  table.items-table,
+  table.items-table tbody,
+  table.items-table tr,
+  table.items-table td{
+    display:block;
+    width:100%;
+  }
+  table.items-table thead{ display:none; }
+  table.items-table tr{
+    position:relative;
+    border:1px solid var(--border);
+    border-radius:9px;
+    padding:10px 12px 4px;
+    margin-bottom:10px;
+    background:#fbfcfe;
+  }
+  table.items-table td{
+    padding:0 0 8px;
+    border-bottom:none;
+  }
+  table.items-table td::before{
+    display:block;
+    font-size:10px;
+    font-weight:700;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:0.3px;
+    margin-bottom:4px;
+  }
+  /* Row number becomes the card heading, e.g. "ITEM 1" */
+  table.items-table td:nth-child(1){
+    font-size:12px;
+    font-weight:700;
+    color:var(--text);
+    padding-right:34px;
+  }
+  table.items-table td:nth-child(1)::before{
+    content:"Item ";
+    display:inline;
+    font-size:12px;
+    color:var(--text);
+    letter-spacing:normal;
+  }
+  table.items-table td:nth-child(2)::before{ content:"Date of Service"; }
+  table.items-table td:nth-child(3)::before{ content:"Item Number"; }
+  table.items-table td:nth-child(4)::before{ content:"Comments (Optional)"; }
+  /* Delete button pinned to the card's top-right corner */
+  table.items-table td:nth-child(5){
+    position:absolute;
+    top:6px;
+    right:6px;
+    width:auto;
+    padding:0;
+  }
+  table.items-table input,
+  table.items-table select,
+  .date-input,
+  .item-lookup,
+  .comments-input{
+    width:100%;
+    min-width:0;
+  }
+  .item-lookup-list{ width:100%; max-width:100%; }
+}

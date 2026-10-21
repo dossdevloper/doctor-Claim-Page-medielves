@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Add Doctors Claim</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://js.zohostatic.com/creator/widgets/version/2.0/widgetsdk-min.js"></script>
+</head>
+<body>
+
+<div class="card">
+
+  <div class="claim-header-banner">
+  <div class="chb-left">
+    <span class="chb-icon">📋</span>
+    <div>
+      <h1>New Insurance Claim</h1>
+    </div>
+  </div>
+  <button type="button" class="chb-close" onclick="window.history.back()">✕</button>
+</div>
+
+  <div class="row">
+    <div>
+      <label>Doctor (Auto-filled)</label>
+      <div class="readonly-field"><span class="avatar-icon">👤</span> <span id="doctorName">Loading...</span></div>
+    </div>
+    <div>
+      <label>Hospital <span class="req">*</span></label>
+      <select id="hospital">
+        <option value="">-Select Hospital-</option>
+      </select>
+    </div>
+  </div>
+
+  <label class="claim-type-label">Select Claim Submission Type <span class="req">*</span></label>
+  <div class="options">
+    <div class="option-card patient selected" id="opt-patient" onclick="selectClaimType('patient')">
+      <div class="check">✓</div>
+      <div class="icon">👤</div>
+      <div class="title">Patient Claim</div>
+      <div class="desc">For consultations, reviews and other services for one patient.</div>
+    </div>
+    <div class="option-card billing" id="opt-billing" onclick="selectClaimType('billing')">
+      <div class="check">✓</div>
+      <div class="icon">👥</div>
+      <div class="title">Billing Sheet / Clinical Documents</div>
+      <div class="desc">For submitting ward rounds, surgery, assistant surgery, anaesthetic and other claims through documents.</div>
+    </div>
+  </div>
+
+  <div class="tip">ℹ️ Tip: Select the option that best matches your service to ensure accurate and faster processing.</div>
+
+  <!-- PATIENT CLAIM SUBFORM -->
+  <div class="subform active" id="patient-subform">
+
+    <div class="panel">
+      <div class="panel-title blue"><span class="panel-ico">🧑‍⚕️</span> PATIENT</div>
+      <div class="row">
+        <div>
+          <label>Patient <span class="req">*</span></label>
+          <div class="add-patient-row">
+            <select id="patient" onchange="handlePatientChange()"><option value="">-Select Patient-</option></select>
+            <button type="button" class="btn-edit-patient" id="editPatientBtn" onclick="openEditPatientModal()" title="Edit Patient" disabled>✎</button>
+            <button type="button" class="btn-outline-add" id="addNewPatientBtn" onclick="openAddPatientModal()">+ New Patient</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title blue"><span class="panel-ico">💳</span> PAYER INFORMATION</div>
+      <div class="payer-info-row" id="payerInfoRow">
+        <div class="payer-info-item">
+          <span class="payer-info-label">Payer</span>
+          <span class="payer-info-value" id="payerDisplayValue">Select a patient to view payer details</span>
+        </div>
+        <div class="payer-info-divider"></div>
+        <div class="payer-info-item">
+          <span class="payer-info-label">Membership Number</span>
+          <span class="payer-info-value" id="membershipDisplayValue">-</span>
+        </div>
+      </div>
+      <!-- Kept hidden: still holds the resolved Payer ID used when the claim is saved -->
+      <select id="payer" style="display:none;"><option value="">-Select Payer-</option></select>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title purple">
+        <span class="panel-ico">🩺</span> REFERRING DOCTOR DETAILS <span class="panel-optional">(Optional)</span>
+      </div>
+      <div class="row referring-row">
+        <div>
+          <label>Referring Doctor</label>
+          <div class="referring-doctor-field" id="referringDoctorFieldWrap">
+            <select id="referringDoctor"><option value="">-Select Doctor-</option></select>
+            <input type="text" id="referringDoctorNew" placeholder="Enter new doctor's name" style="display:none;">
+          </div>
+        </div>
+        <div>
+          <label>Referring Doctor Provider Number</label>
+          <input type="text" id="referringDoctorProvider" placeholder="Enter provider number">
+        </div>
+        <div class="referring-add-btn-cell">
+          <button type="button" class="btn-outline-add purple" id="addNewReferringDoctorBtn" onclick="toggleNewReferringDoctor()">+ Add New Referring Doctor</button>
+        </div>
+      </div>
+      <div class="panel-note">Referring doctor details are used for record purposes only and will not be billed.</div>
+    </div>
+
+<div class="panel claim-settings-row">
+  <div class="csr-title-row">
+    <div class="panel-title blue" style="margin-bottom:0;">
+      <span class="panel-ico">⚙️</span> CLAIM SETTINGS
+    </div>
+  </div>
+
+  <div class="csr-cols">
+    <div class="csr-col">
+      <div class="csr-label">Asst Surgeon</div>
+      <select id="asstSurgeryClaim" onchange="toggleAsstSurgeryFields()">
+        <option>No</option>
+        <option>Yes</option>
+      </select>
+    </div>
+
+    <div class="csr-divider"></div>
+
+    <div class="csr-col">
+      <div class="csr-label"><span class="csr-ico">ⓘ</span> Gap</div>
+      <label class="checkbox-inline-label">
+        <input type="checkbox" id="enableGap" onchange="toggleGapAmount()">
+        Enable Gap
+      </label>
+      <input type="number" id="gapAmount" placeholder="Enter amount" style="margin-top:10px;" disabled>
+    </div>
+
+    <div class="csr-divider"></div>
+
+    <div class="csr-col">
+      <div class="csr-label"><span class="csr-ico">💠</span> Claim Type (Admission Type) <span class="csr-info">ⓘ</span></div>
+      <div class="admission-toggle" id="admissionToggle">
+        <button type="button" class="admission-btn active" data-type="Inpatient" onclick="selectAdmissionType('Inpatient')">🛏 Inpatient</button>
+        <button type="button" class="admission-btn" data-type="Outpatient" onclick="selectAdmissionType('Outpatient')">👤 Outpatient</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" id="primarySurgeonRow" style="display:none;margin-top:18px;">
+    <div>
+      <label>Primary Surgeon</label>
+      <select id="primarySurgeonName" onchange="handlePrimarySurgeonChange()">
+        <option value="">-Select Primary Surgeon-</option>
+      </select>
+    </div>
+    <div>
+      <label>Primary Surgeon Item Numbers</label>
+      <input type="text" id="primarySurgeonItemNumbers" placeholder="Auto-filled" readonly>
+    </div>
+  </div>
+</div>
+
+    <div class="panel items-panel">
+      <div class="items-header">
+        <div class="panel-title blue" style="margin:0;"><span class="panel-ico">🧾</span> CLAIM ITEMS <span class="req">*</span></div>
+      </div>
+      <div class="items-table-scroll">
+      <table class="items-table">
+        <thead>
+          <tr><th>#</th><th>Date of Service</th><th>Item Number</th><th>Comments (Optional)</th><th>Action</th></tr>
+        </thead>
+        <tbody id="claim-items-body">
+          <tr>
+            <td>1</td>
+            <td><input type="text" class="date-input" placeholder="DD/MM/YYYY" readonly autocomplete="off"></td>
+            <td>
+              <div class="item-lookup">
+                <input type="text" class="item-lookup-input" placeholder="-Select-" autocomplete="off">
+                <input type="hidden" class="item-select">
+                <div class="item-lookup-list"></div>
+              </div>
+            </td>
+            <td><input type="text" class="comments-input" placeholder="Enter comments (optional)"></td>
+            <td><button type="button" class="del-btn" onclick="removeRow(this)">🗑</button></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <div class="add-item-below-row">
+        <button type="button" class="btn-add-item" onclick="addClaimItem()">+ Add Line Item</button>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title blue"><span class="panel-ico">📎</span> SUPPORTING DOCUMENTS <span class="panel-optional">(Optional)</span></div>
+      <div class="dropzone patient" id="patientDropzone">
+        <span class="cloud">📤</span>
+        Drag and drop files here or <a href="#" id="patientBrowseLink">Browse Files</a>
+        <div class="hint">Accepted formats: PDF, JPG, PNG (Max. 10 MB per file)</div>
+        <div class="file-list" id="patientFileList"></div>
+      </div>
+      <input type="file" id="patientFileInput" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none;">
+    </div>
+  </div>
+
+  <!-- BILLING SHEET SUBFORM -->
+  <div class="subform" id="billing-subform">
+    <div class="panel">
+      <div class="panel-title green"><span class="panel-ico">📑</span> UPLOAD DOCUMENT <span class="req">*</span></div>
+      <p class="panel-desc">Please upload a clear billing sheet, ward round list, theatre list or other clinical document. Ensure it includes patient names, services, DOS and item numbers.</p>
+      <div class="dropzone" id="billingDropzone">
+        <span class="cloud">📤</span>
+        Drag and drop files here or <a href="#" id="billingBrowseLink">Browse Files</a>
+        <div class="hint">Accepted formats: PDF, JPG, PNG (Max. 10 MB per file)</div>
+        <div class="file-list" id="billingFileList"></div>
+      </div>
+      <input type="file" id="billingFileInput" accept=".pdf,.jpg,.jpeg,.png" multiple style="display:none;">
+    </div>
+
+    <div class="panel">
+      <div class="panel-title blue"><span class="panel-ico">💬</span> COMMENTS <span class="panel-optional">(Optional)</span></div>
+      <textarea maxlength="500" oninput="updateCharCount(this)" placeholder="Enter any additional information (optional)"></textarea>
+      <div class="char-count"><span id="char-count">0</span>/500</div>
+    </div>
+  </div>
+
+  <div class="claim-error" id="claimError" style="display:none;"></div>
+
+  <div class="actions">
+    <button type="button" class="btn-cancel">Cancel</button>
+    <button type="button" class="btn-draft" id="draft-btn">Save as Draft</button>
+    <button type="button" class="submit" id="submit-btn">Submit</button>
+  </div>
+
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal-box">
+    <div class="modal-icon">
+      <svg viewBox="0 0 52 52" width="52" height="52">
+        <circle cx="26" cy="26" r="25" fill="none" stroke="var(--green)" stroke-width="2"/>
+        <path fill="none" stroke="var(--green)" stroke-width="3" d="M14 27l7 7 17-17" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div class="modal-title" id="modalTitle">Claim Saved Successfully</div>
+    <div class="modal-subtitle" id="modalSubtitle">Your claim has been saved.</div>
+    <button type="button" class="modal-continue" id="modalContinueBtn">Continue</button>
+  </div>
+</div>
+
+<!-- ADD NEW PATIENT MODAL -->
+<div class="patient-modal-overlay" id="addPatientModal">
+  <div class="patient-modal-box">
+
+    <div class="patient-modal-header">
+      <div class="pm-header-left">
+        <button type="button" class="pm-back-btn" id="pmBackBtn" onclick="closeAddPatientModal()" title="Back">←</button>
+        <div class="pm-header-icon">👤</div>
+        <div>
+          <div class="patient-modal-title" id="pmTitleText">Create New Patient</div>
+          <div class="pm-header-subtitle" id="pmSubtitleText">Enter patient details and payer information. All mandatory fields must be completed.</div>
+        </div>
+      </div>
+      <div class="pm-header-right">
+        <span class="pm-required-note"><span class="req">*</span> Required fields</span>
+      </div>
+    </div>
+
+    <div class="patient-modal-body" id="patientModalBody">
+
+      <div class="pm-section-title"><span class="pm-num">1</span> Patient Details</div>
+      <div class="pm-row-4">
+        <div>
+          <label>First Name <span class="req">*</span></label>
+          <input type="text" id="np_firstName" placeholder="Enter first name">
+        </div>
+        <div>
+          <label>Last Name <span class="req">*</span></label>
+          <input type="text" id="np_lastName" placeholder="Enter last name">
+        </div>
+        <div>
+          <label>Date of Birth <span class="req">*</span></label>
+          <input type="date" id="np_dob" onchange="calculateNewPatientAge()">
+        </div>
+        <div>
+          <label>Phone Number <span class="req">*</span></label>
+          <div class="pm-phone-row">
+            <span class="pm-phone-prefix">AU +61</span>
+            <input type="text" id="np_phone" placeholder="Enter mobile number">
+          </div>
+        </div>
+      </div>
+
+      <div class="pm-row-4">
+        <div>
+          <label>Email Address <span class="pm-optional">(optional)</span></label>
+          <input type="email" id="np_email" placeholder="Enter email address (optional)">
+        </div>
+        <div>
+          <label>Address Line 1 <span class="req">*</span></label>
+          <input type="text" id="np_address1" placeholder="Enter address line 1">
+        </div>
+        <div>
+          <label>Address Line 2</label>
+          <input type="text" id="np_address2" placeholder="Apartment, unit, suite, etc. (optional)">
+        </div>
+        <div>
+          <label>Gender</label>
+          <select id="np_gender">
+            <option value="">Select gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="pm-row-4">
+        <div>
+          <label>Suburb / City <span class="req">*</span></label>
+          <input type="text" id="np_city" placeholder="Enter suburb or city">
+        </div>
+        <div>
+          <label>State / Territory <span class="req">*</span></label>
+          <select id="np_state">
+            <option value="">Select state</option>
+            <option value="ACT">Australian Capital Territory</option>
+            <option value="NSW">New South Wales</option>
+            <option value="NT">Northern Territory</option>
+            <option value="QLD">Queensland</option>
+            <option value="SA">South Australia</option>
+            <option value="TAS">Tasmania</option>
+            <option value="VIC">Victoria</option>
+            <option value="WA">Western Australia</option>
+          </select>
+        </div>
+        <div>
+          <label>Postcode <span class="req">*</span></label>
+          <input type="text" id="np_postcode" placeholder="Enter postcode">
+        </div>
+        <div>
+          <label>Country <span class="req">*</span></label>
+          <select id="np_country">
+            <option value="Australia" selected>Australia</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="pm-section-title"><span class="pm-num">2</span> Payer Information
+        <span class="pm-optional">Add or manage payer details available for this patient.</span>
+      </div>
+
+      <div class="pm-payer-grid">
+        <div class="pm-payer-card">
+          <div class="pm-payer-card-title green"><span class="pm-payer-card-ico">💳</span> Medicare Details</div>
+          <label class="pm-payer-field-label">Medicare Number</label>
+          <input type="text" id="np_medicareNumber" placeholder="10 digit Medicare number" maxlength="10" inputmode="numeric">
+          <label class="pm-payer-field-label">IRN (Individual Reference Number) <span class="pm-optional">(optional)</span></label>
+          <input type="text" id="np_medicareIRN" placeholder="1 digit IRN" maxlength="1" inputmode="numeric">
+        </div>
+
+        <div class="pm-payer-card">
+          <div class="pm-payer-card-title purple"><span class="pm-payer-card-ico">🎖️</span> Veteran Affairs (DVA) Details</div>
+          <label class="pm-payer-field-label">DVA Number</label>
+          <input type="text" id="np_dvaNumber" placeholder="Up to 9 letters/numbers" maxlength="9">
+        </div>
+
+        <div class="pm-payer-card hf-card">
+          <div class="pm-payer-card-title-row">
+            <div class="pm-payer-card-title orange"><span class="pm-payer-card-ico">🏥</span> Health Fund / Work Cover Details</div>
+            <button type="button" class="btn-outline-add hf-add-btn" onclick="addHfTableRow()">+ Add New Health Fund / Work Cover</button>
+          </div>
+          <p class="pm-payer-card-desc">Manage Health Fund or Work Cover records for this patient.</p>
+          <table class="hf-table">
+            <thead>
+              <tr><th>Payer / Insurer Name</th><th>Type</th><th>Membership / Claim Number</th><th>Additional Details</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="hfRecordsTable">
+              <tr id="hfEmptyRow"><td colspan="5" class="hf-empty">No Health Fund / Work Cover records added yet.</td></tr>
+            </tbody>
+          </table>
+          <div class="pm-payer-card-note">ℹ️ You can add multiple Health Funds or Work Cover records. These will be available to choose when selecting who is paying the invoice.</div>
+        </div>
+      </div>
+
+      <div class="pm-section-title"><span class="pm-num">3</span> Who is Paying the Invoice? <span class="req">*</span>
+        <span class="pm-optional">Select only one payer for this patient.</span>
+      </div>
+
+      <div class="pm-payer-select-grid four-up">
+        <label class="pm-payer-option" id="wpo-medicare">
+          <input type="checkbox" id="np_medicareEnable" onchange="togglePayerBlock('medicare')">
+          <span class="pm-payer-option-ico green">💳</span>
+          <span class="pm-payer-option-text">
+            <span class="pm-payer-option-title">Medicare</span>
+            <span class="pm-payer-option-desc">Claims paid by Medicare</span>
+          </span>
+        </label>
+
+        <label class="pm-payer-option" id="wpo-dva">
+          <input type="checkbox" id="np_dvaEnable" onchange="togglePayerBlock('dva')">
+          <span class="pm-payer-option-ico purple">🎖️</span>
+          <span class="pm-payer-option-text">
+            <span class="pm-payer-option-title">Veteran Affairs (DVA)</span>
+            <span class="pm-payer-option-desc">Claims paid by DVA</span>
+          </span>
+        </label>
+
+        <label class="pm-payer-option" id="wpo-healthfund">
+          <input type="checkbox" id="np_healthFundEnable" onchange="togglePayerBlock('healthFund')">
+          <span class="pm-payer-option-ico orange">🏥</span>
+          <span class="pm-payer-option-text">
+            <span class="pm-payer-option-title">Health Fund / Work Cover</span>
+            <span class="pm-payer-option-desc">Claims paid by private health fund or Work Cover insurer</span>
+          </span>
+        </label>
+
+        <label class="pm-payer-option" id="wpo-selfpay">
+          <input type="checkbox" id="np_selfPayEnable">
+          <span class="pm-payer-option-ico blue">👤</span>
+          <span class="pm-payer-option-text">
+            <span class="pm-payer-option-title">Patient (Self Pay)</span>
+            <span class="pm-payer-option-desc">Patient will pay the invoice</span>
+          </span>
+        </label>
+      </div>
+      <div class="pm-multi-hint">Only one payer can be selected — choosing a new option will automatically deselect the previous one.</div>
+
+      <div class="pm-hf-select-row" id="hfSelectRow" style="display:none;">
+        <label>Select Health Fund / Work Cover <span class="req">*</span></label>
+        <select id="np_selectedHealthFund" onchange="applySelectedHealthFund()">
+          <option value="">-Select Health Fund / Work Cover-</option>
+        </select>
+        <div class="pm-hf-select-hint">ℹ️ The selected payer will be used for all invoices and claims for this patient.</div>
+      </div>
+
+      <div class="pm-note">🔒 Your data is secure. All patient information is stored securely and managed in accordance with Australian Privacy Principles and relevant privacy legislation.</div>
+
+      <div class="pm-error" id="pmError" style="display:none;"></div>
+    </div>
+
+    <div class="patient-modal-footer">
+      <button type="button" class="pm-cancel-btn" onclick="closeAddPatientModal()">Cancel</button>
+      <button type="button" class="pm-create-btn" id="pmCreateBtn" onclick="handleCreateNewPatient()">💾 <span id="pmFooterSaveText">Save Patient</span></button>
+    </div>
+
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
